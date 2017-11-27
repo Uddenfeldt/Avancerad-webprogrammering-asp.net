@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <form method="get" action="/WebApi/GetDish">
+        <h3>Min frukostmat</h3>
+         <input name="dish" type="text" />
+        <button type="submit">ok</button>
+    </form>
+
+    <h3>Kvadrera</h3>
+    <h4> Kvadrera de tal som användaren matar in</h4>
+
+    <form method="get" action="/WebApi/GetNumber">
+        <input name="number" type="text" />
+        <button type="submit">ok</button>
+    </form>
+
+    <h3>Lista med siffror</h3>
+    <form method="get" action="/WebApi/Numbers">
+        <input name="number1" type="text" />
+        <input name="number2" type="text" />
+        <button type="submit">ok</button>
+    </form>
+
+    <h3> välj färg</h3>
+    <form method="get" action="/WebApi/GetColor">
+        <input type="text" name="color" />
+        <button type="submit">Ok</button>
+    </form>
+
+    <h3> konstnärer</h3>
+    <form method="get" action="/WebApi/GetPainting">
+
+        Konstnär: <input name="Painter" type="text"  />
+        Målat Datum: <input name="PaintedDate" type="text" />
+        <button type="submit">ok</button>
+    </form>
+</body>
+</html>
