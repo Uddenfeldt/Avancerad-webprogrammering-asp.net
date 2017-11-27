@@ -35,6 +35,8 @@ namespace WebApplication2
             }
 
             app.UseMvc();
+            app.UseStaticFiles();
+            app.UseDirectoryBrowser();
         }
     }
 }
