@@ -6,17 +6,15 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication2.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/values")]
     public class ValuesController : Controller
     {
         // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet, Route("kalle")]
+        public IEnumerable<string> Kalle()
         {
-            return new string[] { "value1", "value2" };
+            return new string[] { "Marc", "Uddenfeldt" };
         }
 
-        
-        
     }
 }
