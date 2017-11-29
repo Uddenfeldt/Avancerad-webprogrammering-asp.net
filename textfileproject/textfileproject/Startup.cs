@@ -35,6 +35,8 @@ namespace textfileproject
             }
 
             app.UseMvc();
+            app.UseStaticFiles();
+            app.UseDirectoryBrowser();
         }
     }
 }
