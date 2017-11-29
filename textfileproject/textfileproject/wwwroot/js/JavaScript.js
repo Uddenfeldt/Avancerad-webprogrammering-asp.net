@@ -10,7 +10,7 @@ $("#knapp").click(function () {
     $.ajax({
         url: '/person/findcustomer',
         method: 'GET',
-        data: { number: n }
+        data: { id: n }
     })
         .done(function (result) {
             console.log("Succes", result)
