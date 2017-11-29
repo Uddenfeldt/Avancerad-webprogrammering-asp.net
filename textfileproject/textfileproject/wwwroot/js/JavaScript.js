@@ -6,11 +6,15 @@
 $("#knapp").click(function () {
 
     let n = $("#enteredNumber").val();
+    let b = $("#isBrief").is(":checked");
 
     $.ajax({
         url: '/person/findcustomer',
         method: 'GET',
-        data: { id: n }
+        data: {
+            id: n,
+            isBrief: b
+        }
     })
         .done(function (result) {
             console.log("Succes", result)
