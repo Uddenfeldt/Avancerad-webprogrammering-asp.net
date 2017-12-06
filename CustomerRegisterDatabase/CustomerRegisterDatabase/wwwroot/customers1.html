@@ -6,17 +6,37 @@
 
 </head>
 <body>
+    <h2 style="color:green">Welcome to your Customer Register</h2>
+    <form>
+        <table id="customerTable" style="border: 1px solid #999" cellpadding="1">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>FirstName</td>
+                    <td>LastNamer</td>
+                    <td>Email</td>
+                    <td>Gender</td>
+                    <td>Age</td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input id="firstName" type="text" /></td>
+                    <td><input id="lastName" type="text" /></td>
+                    <td><input id="email" type="text" /></td>
+                    <td><input id="gender" type="text" /></td>
+                    <td><input id="age" type="text" /></td>
+                    <td>
+                        <input type="button" id="insert" value="Add Customer" onclick='onAddCustomer(this)' />
+                    </td>
+                </tr>
+            </thead>
+        </table>
+        <br />
+        <div id="msg"></div>
+    </form>
 
-    <div id="addForm">
-        <label>Fornavn</label>
-        <input name="FirstName" value="Sven"/>
-        <button>Ok</button>
-    </div>
 
-    <div id="customers">
-       
-    </div>
- 
 
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"
             integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

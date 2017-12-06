@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace CustomerRegisterDatabase.Controllers
 {
+
     [Route("api/customers")]
     public class CustomerController : Controller
     {
@@ -16,7 +17,7 @@ namespace CustomerRegisterDatabase.Controllers
             databaseContext.Database.EnsureCreated();
         }
 
-        [HttpGet, Route("GetCustomers")]
+        [HttpGet, Route("")]
 
         public IActionResult GetCustomers()
         {
@@ -25,14 +26,28 @@ namespace CustomerRegisterDatabase.Controllers
         }
 
         [HttpPost]
-        public IActionResult Add(Customer customer)
+        public IActionResult Add([FromBody]Customer obj)
         {
 
-            databaseContext.Add(customer);
+            databaseContext.Add(obj);
             databaseContext.SaveChanges();
 
-            return Ok(customer.Id + " " + customer.FirstName);
+            return new ObjectResult("Customer add successfully!");
         }
-        
+
+        [Route("/api/DeleteCustomer/{id}")]
+
+        public IActionResult DeleteCustomer(Customer customer)
+        {
+            databaseContext.Remove(customer);
+            return new ObjectResult("Customer deleted successfully");
+        }
+
+        [Route("/api/EditCustomer")]
+        public IActionResult EditCustomer([FromBody] Customer obj)
+        {
+            databaseContext.Update(obj);
+            return new ObjectResult("Customer updated successfully!");
+        }
     }
 }
