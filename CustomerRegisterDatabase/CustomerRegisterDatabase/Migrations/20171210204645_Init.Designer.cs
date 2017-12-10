@@ -11,8 +11,8 @@ using System;
 namespace CustomerRegisterDatabase.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20171206091307_Initial")]
-    partial class Initial
+    [Migration("20171210204645_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
