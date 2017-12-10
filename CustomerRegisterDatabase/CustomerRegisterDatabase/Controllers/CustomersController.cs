@@ -17,7 +17,7 @@ namespace CustomerRegisterDatabase.Controllers
             databaseContext.Database.EnsureCreated();
         }
 
-        [HttpGet, Route("")]
+        [HttpGet, Route("GetCustomers")]
 
         public IActionResult GetCustomers()
         {
@@ -25,28 +25,33 @@ namespace CustomerRegisterDatabase.Controllers
             return Ok(list);
         }
 
-        [HttpPost]
+        [HttpPost, Route("AddCustomer")]
         public IActionResult Add([FromBody]Customer obj)
         {
 
             databaseContext.Add(obj);
             databaseContext.SaveChanges();
 
-            return new ObjectResult("Customer add successfully!");
+            return Ok();
         }
 
-        [Route("/api/DeleteCustomer/{id}")]
+        [HttpDelete, Route("DeleteCustomer/{id}")]
 
-        public IActionResult DeleteCustomer(Customer customer)
+        public IActionResult DeleteCustomer(int id)
         {
+            var customer = databaseContext.Customers.First(c => c.Id == id);
+
             databaseContext.Remove(customer);
-            return new ObjectResult("Customer deleted successfully");
+            databaseContext.SaveChanges();
+            return Ok();
         }
 
-        [Route("/api/EditCustomer")]
-        public IActionResult EditCustomer([FromBody] Customer obj)
+        [HttpPut, Route("EditCustomer")]
+        public IActionResult EditCustomer([FromBody]Customer obj)
         {
+
             databaseContext.Update(obj);
+            databaseContext.SaveChanges();
             return new ObjectResult("Customer updated successfully!");
         }
     }

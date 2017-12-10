@@ -3,22 +3,24 @@
 });
 
 var Customer = {
-    id: 0,
-    firstName: "",
-    lastName: "",
-    email: "",
-    gender: "",
-    age: "",
-}
+    firstName,
+    lastName,
+    email,
+    gender,
+    age,
+};
+
 
 function getCustomerList() {
     $.ajax({
-        url: '/api/Customers',
+        url: '/api/Customers/GetCustomers',
         method: 'Get',
         dataType: 'json',
-        succes: function (customers) {
+        success: function (customers) {
+
             customerListSucces(customers)
         },
+
         error: function (request, message, error) {
             handleException(request, message, error);
         }
@@ -27,14 +29,14 @@ function getCustomerList() {
 
 function customerListSucces(customer) {
     $("#customerTable tbody").remove();
-    $.each(customers, function (index, customer) {
+    $.each(customer, function (index, customer) {
         customerAddRow(customer);
     });
 }
 
 function customerAddRow(customer) {
     if ($("#customerTable tbody").length == 0) {
-        $("#customerTable").appen("<tbody></tbody>");
+        $("#customerTable").append("<tbody></tbody>");
     }
 
     $("#customerTable tbody").append(
@@ -60,7 +62,7 @@ function customerBuildTableRow(customer) {
         "data-gender='" + customer.gender + "' " +
         "data-age='" + customer.age + "' " +
         ">" +
-        "span class='glyphicon glyphicon-edit' /> Edit" +
+        "<span class='glyphicon glyphicon-edit' /> Edit" +
         "</button> " +
         " <button type='button' " +
         "onClick='customerDelete(this);'" +
@@ -76,8 +78,9 @@ function customerBuildTableRow(customer) {
 
 function onAddCustomer(item) {
     var options = {};
-    options.url = "/api/AddCustomer";
+    options.url = "/api/customers/AddCustomer";
     options.type = "POST";
+
     var obj = Customer;
     obj.firstName = $("#firstName").val();
     obj.lastName = $("#lastName").val();
@@ -89,9 +92,14 @@ function onAddCustomer(item) {
     options.contentType = "application/json";
     options.dataType = "html";
 
-    options.succes = function (msg) {
+    options.success = function (msg) {
         getCustomerList();
         $("#msg").html(msg);
+        $("#firstName").val('');
+        $("#lastName").val('');
+        $("#email").val('');
+        $("#gender").val('');
+        $("#age").val('');
     },
         options.error = function () {
             $("#msg").html("Error while calling the web API!");
@@ -99,27 +107,29 @@ function onAddCustomer(item) {
     $.ajax(options);
 
 }
-function customerEdit(item) {
+function customerUpdate(item) {
     var id = $(item).data("id");
     var options = {};
-    options.url = "api/EditCustomer"
+    options.url = "api/customers/EditCustomer/";
     options.type = "PUT";
 
     var obj = Customer;
     obj.id = $(item).data("id");
     obj.firstName = $(".input-firstName", $(item).parent().parent()).val();
-    obj.lastName = $(".input-lastName", $(item).parent().parent()).val();
-    obj.email = $(".input-email", $(item).parent().parent()).val();
-    obj.gender = $(".input-gender", $(item).parent().parent()).val();
-    obj.age = $(".input-age", $(item).parent().parent()).val();
+    obj.lastName = $(".input-lastName").val();
+    obj.email = $(".input-email").val();
+    obj.gender = $(".input-gender").val();
+    obj.age = $(".input-age").val();
 
     console.dir(obj);
     options.data = JSON.stringify(obj);
     options.contentType = "application/json";
     options.dataType = "html";
 
-    options.succes = function (msg) {
+    options.success = function (msg) {
+        console.log('msg=' + msg);
         $("#msg").html(msg);
+        getCustomerList();
     },
         options.error = function () {
             $("#msg").html("Error while calling the web API!");
@@ -130,12 +140,12 @@ function customerEdit(item) {
 function customerDelete(item) {
     var id = $(item).data("id");
     var options = {};
-    options.url = "api/DeleteCustomer/"
+    options.url = "api/customers/DeleteCustomer/"
         + id;
     options.type = "DELETE";
     options.dataType = "html";
 
-    options.succes = function (msg) {
+    options.success = function (msg) {
         console.log('msg=' + msg);
         $("#msg").html(msg);
         getCustomerList();
