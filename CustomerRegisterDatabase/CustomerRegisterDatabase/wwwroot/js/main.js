@@ -32,6 +32,7 @@ function customerListSucces(customer) {
     $.each(customer, function (index, customer) {
         customerAddRow(customer);
     });
+
 }
 
 function customerAddRow(customer) {
