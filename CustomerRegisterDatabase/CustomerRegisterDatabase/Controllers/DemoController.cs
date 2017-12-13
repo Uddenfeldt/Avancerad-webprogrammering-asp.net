@@ -8,7 +8,7 @@ using CustomerRegisterDatabase.Models;
 
 namespace WebDeploy.Controllers
 {
-    [Route("")]
+    [Route("Demo")]
     public class DemoController : Controller
     {
         private readonly IHostingEnvironment env;
@@ -19,8 +19,8 @@ namespace WebDeploy.Controllers
             this.env = env;
             this.mail = mail;
         }
-        [HttpGet, Route("")]
-        public IActionResult Demo()
+        [HttpGet, Route("Demo1")]
+        public IActionResult Demo1()
         {
             return Ok(new object[] {
                 env.IsDevelopment(),

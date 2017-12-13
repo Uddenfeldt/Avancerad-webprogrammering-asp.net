@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using CustomerRegisterDatabase.Entities;
+using CustomerRegisterDatabase.Models;
 
 namespace CustomerRegisterDatabase
 {
@@ -22,6 +23,7 @@ namespace CustomerRegisterDatabase
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddMvc();
+            services.AddSingleton(Configuration.GetSection("MailConfiguration").Get<MailConfiguration>());
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
