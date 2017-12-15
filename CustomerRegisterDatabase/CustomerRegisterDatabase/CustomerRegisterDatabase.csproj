@@ -7,12 +7,32 @@
   <ItemGroup>
     <None Remove="Properties\PublishProfiles\CustomProfile.pubxml" />
   </ItemGroup>
-
+  
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
   </ItemGroup>
 
+  
+    <ItemGroup>
+      <_CustomFiles Include="$(MSBuildProjectDirectory)/../Djur/**/*" />
+      <DotnetPublishFiles Include="@(_CustomFiles)">
+        <DestinationRelativePath>Animals/%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
+      </DotnetPublishFiles>
+    </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot/NotForPublish.html" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot/secret*.html" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot/SecretHtml/**/*" CopyToPublishDirectory="Never" />
+  </ItemGroup>
+  
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.1" />
   </ItemGroup>

@@ -36,7 +36,7 @@ function customerListSucces(customer) {
 }
 
 function customerAddRow(customer) {
-    if ($("#customerTable tbody").length == 0) {
+    if ($("#customerTable tbody").length === 0) {
         $("#customerTable").append("<tbody></tbody>");
     }
 
@@ -161,7 +161,7 @@ function handleException(request, message, error) {
     var msg = "";
     msg += "Code:" + request.status + "\n";
     msg += "Text" + request.statusText + "\n";
-    if (request.responseJson != null) {
+    if (request.responseJson !== null) {
         msg += "Message:" + request.responseJson.Message + "\n";
 
     }
