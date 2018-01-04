@@ -10,6 +10,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using BilHallen.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace BilHallen
 {
@@ -28,6 +29,27 @@ namespace BilHallen
             services.AddDbContext<DatabaseContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdministratorRights", policy => policy.RequireClaim("CarsAppRole", "Administrator"));
+                options.AddPolicy("AnonymousRights", policy => policy.RequireClaim("CarsAppRole", "Anonymous"));
+                options.AddPolicy("ViewRights", policy => policy.RequireAssertion(context =>
+                {
+                    var user = context.User;
+                    var adminRights = user.Claims.Where(a => a.Type == "CarsAppRole").Select(a => a.Value).FirstOrDefault();
+
+                    if (adminRights == "Administrator")
+                    {
+                        return true;
+                    }
+
+                    else
+                    {
+                        return false;
+                    }
+                }));
+            });
         }
 
 
