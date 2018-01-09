@@ -11,10 +11,9 @@ using System;
 namespace BilHallen.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20180102094420_init")]
-    partial class init
+    partial class DatabaseContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,7 +29,7 @@ namespace BilHallen.Migrations
 
                     b.Property<string>("Color");
 
-                    b.Property<int>("HorsePower");
+                    b.Property<int>("HorsePowers");
 
                     b.Property<int>("Kilometers");
 

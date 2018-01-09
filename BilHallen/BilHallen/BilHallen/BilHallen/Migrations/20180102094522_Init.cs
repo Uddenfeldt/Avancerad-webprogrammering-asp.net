@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BilHallen.Migrations
 {
-    public partial class init : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -17,7 +17,7 @@ namespace BilHallen.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     City = table.Column<string>(nullable: true),
                     Color = table.Column<string>(nullable: true),
-                    HorsePower = table.Column<int>(nullable: false),
+                    HorsePowers = table.Column<int>(nullable: false),
                     Kilometers = table.Column<int>(nullable: false),
                     Manufacturer = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),

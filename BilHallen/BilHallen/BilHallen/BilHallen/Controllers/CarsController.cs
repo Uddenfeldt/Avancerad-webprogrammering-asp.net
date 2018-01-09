@@ -25,6 +25,13 @@ namespace BilHallen.Controllers
             return Ok(list);
         }
 
+        [HttpGet, Route("GetCar/{id}")]
+        public IActionResult GetCar(int id)
+        {
+            var car = databaseContext.Cars.First(c => c.Id == id);
+            return Ok(car);
+        }
+
         [HttpPost, Route("AddCar")]
         public IActionResult AddCar([FromBody]Car obj)
         {

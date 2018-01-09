@@ -18,8 +18,8 @@ namespace BilHallen.Entities
         public string Color { get; set; }
         public int Kilometers { get; set; }
         public int Price { get; set; }
-        public int HorsePower { get; set; }
+        public int HorsePowers { get; set; }
         public string City { get; set; }
-
+        public string ImageUrl { get; set; }
     }
 }

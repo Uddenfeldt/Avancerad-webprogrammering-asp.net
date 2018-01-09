@@ -10,7 +10,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using BilHallen.Entities;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Identity;
 
 namespace BilHallen
 {
@@ -23,46 +22,22 @@ namespace BilHallen
 
         public IConfiguration Configuration { get; }
 
-
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DatabaseContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+             options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddMvc();
-
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("AdministratorRights", policy => policy.RequireClaim("CarsAppRole", "Administrator"));
-                options.AddPolicy("AnonymousRights", policy => policy.RequireClaim("CarsAppRole", "Anonymous"));
-                options.AddPolicy("ViewRights", policy => policy.RequireAssertion(context =>
-                {
-                    var user = context.User;
-                    var adminRights = user.Claims.Where(a => a.Type == "CarsAppRole").Select(a => a.Value).FirstOrDefault();
-
-                    if (adminRights == "Administrator")
-                    {
-                        return true;
-                    }
-
-                    else
-                    {
-                        return false;
-                    }
-                }));
-            });
         }
 
-
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
-
             app.UseDeveloperExceptionPage();
             app.UseStaticFiles();
             app.UseDirectoryBrowser();
             app.UseStatusCodePages();
             app.UseMvc();
-            
         }
     }
 }
