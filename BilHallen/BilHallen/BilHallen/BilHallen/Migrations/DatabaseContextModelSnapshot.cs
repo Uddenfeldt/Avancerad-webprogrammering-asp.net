@@ -31,6 +31,8 @@ namespace BilHallen.Migrations
 
                     b.Property<int>("HorsePowers");
 
+                    b.Property<string>("ImageUrl");
+
                     b.Property<int>("Kilometers");
 
                     b.Property<string>("Manufacturer");

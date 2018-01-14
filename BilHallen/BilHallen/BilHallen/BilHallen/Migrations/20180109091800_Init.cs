@@ -18,6 +18,7 @@ namespace BilHallen.Migrations
                     City = table.Column<string>(nullable: true),
                     Color = table.Column<string>(nullable: true),
                     HorsePowers = table.Column<int>(nullable: false),
+                    ImageUrl = table.Column<string>(nullable: true),
                     Kilometers = table.Column<int>(nullable: false),
                     Manufacturer = table.Column<string>(nullable: true),
                     Model = table.Column<string>(nullable: true),

@@ -11,7 +11,7 @@ using System;
 namespace BilHallen.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20180102094522_Init")]
+    [Migration("20180109091800_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,8 @@ namespace BilHallen.Migrations
                     b.Property<string>("Color");
 
                     b.Property<int>("HorsePowers");
+
+                    b.Property<string>("ImageUrl");
 
                     b.Property<int>("Kilometers");
 
